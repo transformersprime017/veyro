@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="VEYRO builds modern websites and digital experiences that turn attention into enquiries.">
+<title>VEYRO — Built to be noticed.</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#090a0b; --paper:#f3f0e8; --muted:#a7a7a2; --lime:#c7ff3d;
+  --line:rgba(243,240,232,.13); --card:#111315;
+  --max:1240px; --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--paper);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");z-index:20}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.container{width:min(var(--max),calc(100% - 40px));margin:auto}
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--lime);width:0;z-index:100;box-shadow:0 0 18px var(--lime)}
+.cursor,.cursor-dot{position:fixed;pointer-events:none;z-index:101;transform:translate(-50%,-50%);mix-blend-mode:difference}
+.cursor{width:34px;height:34px;border:1px solid white;border-radius:50%;transition:width .25s,height .25s,background .25s}
+.cursor-dot{width:5px;height:5px;background:white;border-radius:50%}
+@media(max-width:800px){.cursor,.cursor-dot{display:none}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:20px 0;transition:.35s var(--ease)}
+nav.scrolled{background:rgba(9,10,11,.78);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:11px;font:700 18px "Space Grotesk";letter-spacing:.22em}
+.logo-mark{width:27px;height:27px;position:relative;display:grid;place-items:center}
+.logo-mark:before,.logo-mark:after{content:"";position:absolute;width:17px;height:3px;border-radius:3px;transform:rotate(45deg);background:var(--paper)}
+.logo-mark:after{transform:rotate(-45deg);width:11px;right:0;background:var(--lime)}
+.navlinks{display:flex;gap:28px;font-size:13px;color:#c5c5c0}
+.navlinks a{transition:.2s}.navlinks a:hover{color:var(--lime)}
+.nav-cta{border:1px solid var(--line);padding:10px 15px;border-radius:100px;font-size:12px}
+.nav-cta:hover{border-color:var(--lime);color:var(--lime)}
+
+.hero{min-height:100svh;display:flex;align-items:center;position:relative;padding:150px 0 80px}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:70px;align-items:end}
+.kicker{display:flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--muted);margin-bottom:26px}
+.kicker i{display:block;width:7px;height:7px;background:var(--lime);border-radius:50%;box-shadow:0 0 20px var(--lime)}
+h1{font:600 clamp(58px,9vw,132px)/.82 "Space Grotesk";letter-spacing:-.075em;margin:0;max-width:1000px}
+h1 span{color:var(--lime)}
+.hero-copy{max-width:420px;margin-left:auto;padding-bottom:9px}
+.hero-copy p{font-size:16px;line-height:1.65;color:#b8b8b2;margin:0 0 28px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid var(--line);border-radius:100px;font-size:13px;transition:.3s var(--ease)}
+.btn.primary{background:var(--lime);color:#090a0b;border-color:var(--lime);font-weight:700}
+.btn:hover{transform:translateY(-3px);border-color:var(--lime)}
+.hero-orbit{position:absolute;right:-10vw;top:14vh;width:42vw;height:42vw;max-width:620px;max-height:620px;border:1px solid rgba(199,255,61,.12);border-radius:50%;pointer-events:none}
+.hero-orbit:before,.hero-orbit:after{content:"";position:absolute;border:1px solid rgba(243,240,232,.09);border-radius:50%;inset:11%;transform:rotate(27deg) scaleX(.5)}
+.hero-orbit:after{inset:25%;transform:rotate(-35deg) scaleX(.65)}
+.orbit-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--lime);top:10%;left:50%;box-shadow:0 0 25px var(--lime);animation:orbit 9s linear infinite}
+@keyframes orbit{to{transform:rotate(360deg) translateX(21vw) rotate(-360deg)}}
+.scroll-note{position:absolute;bottom:28px;left:0;font-size:10px;letter-spacing:.18em;color:#777;text-transform:uppercase}
+
+.marquee{border-block:1px solid var(--line);overflow:hidden;padding:16px 0}
+.marquee-track{display:flex;white-space:nowrap;width:max-content;animation:marquee 25s linear infinite}
+.marquee span{font:500 15px "Space Grotesk";letter-spacing:.12em;margin-right:45px;color:#999}
+.marquee b{color:var(--lime);font-weight:500}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+.section{padding:130px 0}
+.section-head{display:flex;justify-content:space-between;gap:40px;align-items:flex-end;margin-bottom:55px}
+.eyebrow{font:500 11px "Space Grotesk";letter-spacing:.2em;color:var(--lime);text-transform:uppercase}
+.section-title{font:500 clamp(42px,6vw,78px)/.92 "Space Grotesk";letter-spacing:-.06em;margin:12px 0 0}
+.section-intro{max-width:350px;color:#999;line-height:1.6;font-size:14px}
+
+.services{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.service{padding:30px 22px 38px 0;border-bottom:1px solid var(--line);position:relative;transition:.4s var(--ease)}
+.service:not(:nth-child(3n+1)){padding-left:22px;border-left:1px solid var(--line)}
+.service:hover{background:linear-gradient(90deg,rgba(199,255,61,.05),transparent);padding-left:28px}
+.service-num{font:12px "Space Grotesk";color:#666}
+.service h3{font:500 30px "Space Grotesk";margin:60px 0 12px;letter-spacing:-.04em}
+.service p{color:#888;line-height:1.65;font-size:13px;max-width:320px}
+.service-arrow{position:absolute;right:20px;top:28px;color:#555;transition:.3s}.service:hover .service-arrow{color:var(--lime);transform:translate(4px,-4px)}
+
+.lab{background:var(--paper);color:var(--bg);padding:120px 0;overflow:hidden}
+.lab .eyebrow{color:#5d7300}
+.lab-top{display:flex;justify-content:space-between;align-items:end;gap:30px}
+.lab h2{font:500 clamp(45px,7vw,90px)/.9 "Space Grotesk";letter-spacing:-.07em;margin:12px 0 0;max-width:780px}
+.lab-copy{max-width:330px;color:#666;font-size:14px;line-height:1.6}
+.lab-grid{display:grid;grid-template-columns:1.4fr .8fr;gap:18px;margin-top:60px}
+.project{position:relative;min-height:500px;border-radius:4px;overflow:hidden;background:#151719;transform-style:preserve-3d}
+.project.small{min-height:240px}
+.project-stack{display:grid;gap:18px}
+.project-bg{position:absolute;inset:0;background:
+ radial-gradient(circle at 65% 30%,rgba(199,255,61,.4),transparent 25%),
+ linear-gradient(130deg,#20252a,#08090a 70%)}
+.project:nth-child(2) .project-bg{background:
+ radial-gradient(circle at 30% 70%,rgba(255,255,255,.18),transparent 24%),
+ linear-gradient(130deg,#303236,#090a0b)}
+.project:nth-child(3) .project-bg{background:
+ radial-gradient(circle at 70% 40%,rgba(199,255,61,.25),transparent 28%),
+ linear-gradient(130deg,#17191c,#050607)}
+.project-ui{position:absolute;inset:12%;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.22);backdrop-filter:blur(8px);padding:25px;transform:translateZ(40px)}
+.project-ui .mini-line{width:35%;height:4px;background:var(--lime);margin-bottom:35px}
+.project-ui .mini-title{font:500 clamp(32px,4vw,64px)/.9 "Space Grotesk";letter-spacing:-.07em}
+.project-ui .mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:40px}
+.project-ui .mini-grid i{display:block;height:55px;background:rgba(255,255,255,.08)}
+.project-label{position:absolute;left:24px;bottom:22px;z-index:2;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#aaa}
+.project-label b{display:block;color:white;font:500 20px "Space Grotesk";letter-spacing:-.03em;text-transform:none;margin-top:4px}
+
+.manifesto{display:grid;grid-template-columns:.7fr 1.3fr;gap:80px;align-items:start}
+.manifesto-big{font:500 clamp(42px,6vw,78px)/.98 "Space Grotesk";letter-spacing:-.06em;margin:0}
+.manifesto-big em{font-style:normal;color:var(--lime)}
+.manifesto-side{border-top:1px solid var(--line);padding-top:20px;color:#8f8f89;line-height:1.8;font-size:14px}
+
+.process{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.step{padding:26px 20px 20px 0;min-height:210px;border-bottom:1px solid var(--line)}
+.step:not(:first-child){border-left:1px solid var(--line);padding-left:20px}
+.step-number{color:var(--lime);font:12px "Space Grotesk"}
+.step h3{font:500 23px "Space Grotesk";margin:55px 0 10px}.step p{font-size:12px;line-height:1.6;color:#777}
+
+.cta{min-height:75vh;display:flex;align-items:center;position:relative;overflow:hidden}
+.cta:before{content:"";position:absolute;width:70vw;height:70vw;max-width:900px;max-height:900px;border:1px solid rgba(199,255,61,.1);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}
+.cta-inner{position:relative;text-align:center;width:100%}
+.cta h2{font:500 clamp(58px,10vw,145px)/.8 "Space Grotesk";letter-spacing:-.08em;margin:18px auto 40px;max-width:1100px}
+.cta h2 span{color:var(--lime)}
+footer{border-top:1px solid var(--line);padding:25px 0;color:#666;font-size:11px}
+.footer-inner{display:flex;justify-content:space-between;gap:20px}
+.footer-links{display:flex;gap:20px}.footer-links a:hover{color:var(--lime)}
+
+.reveal{opacity:0;transform:translateY(35px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .navlinks{display:none}
+  .hero-grid,.lab-grid,.manifesto{grid-template-columns:1fr}
+  .hero-copy{margin:45px 0 0}
+  .hero-orbit{width:70vw;height:70vw;right:-30vw;top:20vh}
+  .services{grid-template-columns:1fr}
+  .service:not(:nth-child(3n+1)){padding-left:0;border-left:0}
+  .service:hover{padding-left:10px}
+  .process{grid-template-columns:1fr 1fr}
+  .step:nth-child(odd){border-left:0;padding-left:0}
+}
+@media(max-width:600px){
+  .container{width:min(var(--max),calc(100% - 28px))}
+  .hero{padding-top:120px}
+  .section,.lab{padding:90px 0}
+  .section-head,.lab-top{display:block}
+  .section-intro,.lab-copy{margin-top:25px}
+  .lab-grid{gap:14px}.project{min-height:420px}.project.small{min-height:210px}
+  .process{grid-template-columns:1fr}
+  .step:not(:first-child){border-left:0;padding-left:0}
+  .step{min-height:160px}.step h3{margin-top:35px}
+  .footer-inner{display:block}.footer-links{margin-top:15px}
+}
+
+/* V2 expansion layer */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:45px}.about-card{border:1px solid var(--line);padding:28px;min-height:230px;background:linear-gradient(140deg,#111416,#0b0c0d)}.about-card h3{font:500 27px "Space Grotesk";margin:55px 0 10px}.about-card p{font-size:13px;line-height:1.7;color:#858680;margin:0}
+.faq{border-top:1px solid var(--line)}.faq-item{border-bottom:1px solid var(--line)}.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:0;color:white;text-align:left;padding:25px 0;cursor:pointer;font:500 20px "Space Grotesk"}.faq-q span:last-child{color:var(--lime)}.faq-a{max-height:0;overflow:hidden;color:#858680;font-size:13px;line-height:1.7;transition:max-height .45s var(--ease)}.faq-item.open .faq-a{max-height:160px;padding-bottom:22px}
+.contact{background:var(--paper);color:#090a0b;padding:120px 0}.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px}.contact .eyebrow{color:#617700}.contact h2{font:500 clamp(48px,7vw,90px)/.88 "Space Grotesk";letter-spacing:-.07em;margin:12px 0 25px}.contact-copy{color:#666;line-height:1.7;font-size:14px}.contact-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}.contact .btn{color:#090a0b;border-color:#c9c6bf}.contact .btn.primary{border-color:#090a0b}form{display:grid;gap:13px}.field{display:grid;gap:7px}.field label{font:10px "DM Mono";text-transform:uppercase;letter-spacing:.13em;color:#666}.field input,.field textarea,.field select{width:100%;border:0;border-bottom:1px solid #bbb9b1;background:transparent;padding:13px 0;color:#090a0b;outline:0}.field textarea{min-height:90px;resize:vertical}.form-status{font-size:12px;color:#617700;min-height:18px}
+.playground{padding:120px 0}.play-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:50px}.experiment{border:1px solid var(--line);min-height:240px;padding:22px;position:relative;overflow:hidden;background:#0d0f10}.experiment h3{font:500 25px "Space Grotesk";margin:55px 0 8px}.experiment p{font-size:12px;color:#777;line-height:1.6}.exp-orb{position:absolute;width:100px;height:100px;border-radius:50%;background:var(--lime);right:-25px;top:-25px;transition:.5s}.experiment:hover .exp-orb{width:160px;height:160px}.terminal{font:11px "DM Mono";color:#999;line-height:1.8}.terminal b{color:var(--lime)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(12px);z-index:110;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modal-box{width:min(650px,100%);background:#101214;border:1px solid var(--line);padding:30px;position:relative}.modal-close{position:absolute;right:15px;top:15px;background:none;border:0;color:#fff;font-size:22px;cursor:pointer}.modal-box h2{font:500 42px "Space Grotesk";margin:0 0 12px}.modal-box p{color:#888;font-size:13px;line-height:1.6}.modal-options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:25px}.modal-option{border:1px solid var(--line);padding:16px;text-align:left;background:#0b0c0d;color:#fff;cursor:pointer}.modal-option:hover{border-color:var(--lime)}.modal-option b{display:block;font:500 18px "Space Grotesk";margin-bottom:5px}.modal-option span{font-size:11px;color:#777}
+@media(max-width:900px){.contact-grid,.about-grid{grid-template-columns:1fr}.play-grid{grid-template-columns:1fr 1fr}}@media(max-width:600px){.play-grid{grid-template-columns:1fr}.modal-options{grid-template-columns:1fr}.contact{padding:90px 0}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"VEYRO","url":"https://veyro.example/","description":"Modern websites and digital experiences for local businesses.","areaServed":{"@type":"AdministrativeArea","name":"Delhi NCR"},"serviceType":["Website Design","Website Development","Local SEO","Digital Strategy","AI Automation"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"VEYRO","url":"https://veyro.example/"}</script>
+</head>
+<body>
+<div class="progress"></div>
+<div class="cursor"></div><div class="cursor-dot"></div>
+
+<nav id="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="#"><span class="logo-mark"></span>VEYRO</a>
+    <div class="navlinks">
+      <a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a>
+    </div>
+    <a class="nav-cta" href="#contact">Start a project ↗</a>
+  </div>
+</nav>
+
+<main>
+<section class="hero">
+  <div class="hero-orbit"><span class="orbit-dot"></span></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="reveal">
+        <div class="kicker"><i></i> Web & Digital Studio · Delhi NCR</div>
+        <h1>BUILT TO BE<br><span>NOTICED.</span></h1>
+      </div>
+      <div class="hero-copy reveal">
+        <p>Modern websites and digital experiences for businesses that are ready to look as good online as they do in real life.</p>
+        <div class="actions">
+          <a class="btn primary magnetic" href="#contact">Start a project <span>↗</span></a>
+          <a class="btn magnetic" href="#work">Explore Veyro <span>↓</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-note">Scroll to enter the studio ↓</div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>STRATEGY <b>✦</b></span><span>DESIGN <b>✦</b></span><span>DEVELOPMENT <b>✦</b></span><span>CONVERSION <b>✦</b></span>
+    <span>STRATEGY <b>✦</b></span><span>DESIGN <b>✦</b></span><span>DEVELOPMENT <b>✦</b></span><span>CONVERSION <b>✦</b></span>
+  </div>
+</div>
+
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><div class="eyebrow">01 / What we do</div><h2 class="section-title">Not just a website.</h2></div>
+      <p class="section-intro">Your website is the first handshake. We make sure it feels deliberate, memorable and easy to act on.</p>
+    </div>
+    <div class="services">
+      <article class="service reveal"><span class="service-num">01</span><span class="service-arrow">↗</span><h3>Strategy</h3><p>Positioning, structure and conversion thinking before a single pixel gets pushed around.</p></article>
+      <article class="service reveal"><span class="service-num">02</span><span class="service-arrow">↗</span><h3>Design</h3><p>Editorial layouts, bold typography and visual systems that make a business instantly recognisable.</p></article>
+      <article class="service reveal"><span class="service-num">03</span><span class="service-arrow">↗</span><h3>Development</h3><p>Fast, responsive websites with clean code, useful interactions and room to grow.</p></article>
+      <article class="service reveal"><span class="service-num">04</span><span class="service-arrow">↗</span><h3>Local Growth</h3><p>Landing pages and digital foundations designed around real local search and enquiry behaviour.</p></article>
+      <article class="service reveal"><span class="service-num">05</span><span class="service-arrow">↗</span><h3>AI Systems</h3><p>Smart automations and lightweight AI experiences that can make a small business feel much bigger.</p></article>
+      <article class="service reveal"><span class="service-num">06</span><span class="service-arrow">↗</span><h3>Evolution</h3><p>Launch first. Learn from users. Keep improving. The site is a living product, not a dead brochure.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="lab" id="work">
+  <div class="container">
+    <div class="lab-top reveal">
+      <div><div class="eyebrow">02 / The Veyro Lab</div><h2>Work should feel<br>like an experience.</h2></div>
+      <p class="lab-copy">These are concept pieces for the studio portfolio. As real projects arrive, they can drop into the same system without redesigning the whole site.</p>
+    </div>
+    <div class="lab-grid">
+      <article class="project tilt reveal">
+        <div class="project-bg"></div>
+        <div class="project-ui"><div class="mini-line"></div><div class="mini-title">SPACE<br>DEFINED.</div><div class="mini-grid"><i></i><i></i><i></i></div></div>
+        <div class="project-label">Concept / Interior <b>Monument House</b></div>
+      </article>
+      <div class="project-stack">
+        <article class="project small tilt reveal">
+          <div class="project-bg"></div>
+          <div class="project-ui"><div class="mini-line"></div><div class="mini-title">FORM<br>MEETS FUNCTION.</div></div>
+          <div class="project-label">Concept / Studio <b>Atelier 01</b></div>
+        </article>
+        <article class="project small tilt reveal">
+          <div class="project-bg"></div>
+          <div class="project-ui"><div class="mini-line"></div><div class="mini-title">YOUR<br>NEXT MOVE.</div></div>
+          <div class="project-label">Concept / Business <b>Northline</b></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container manifesto">
+    <div class="eyebrow reveal">03 / The idea</div>
+    <div>
+      <p class="manifesto-big reveal">Small studio.<br><em>Big digital presence.</em><br>No template energy.</p>
+      <p class="manifesto-side reveal">VEYRO starts lean on purpose. That means faster decisions, closer collaboration and websites built around the actual business instead of a recycled agency layout.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <div><div class="eyebrow">04 / Process</div><h2 class="section-title">Four moves.</h2></div>
+      <p class="section-intro">Simple enough for a one-person studio today. Structured enough to become a team tomorrow.</p>
+    </div>
+    <div class="process">
+      <article class="step reveal"><span class="step-number">01</span><h3>Discover</h3><p>Understand the business, customer and opportunity.</p></article>
+      <article class="step reveal"><span class="step-number">02</span><h3>Shape</h3><p>Turn the strategy into a visual direction and page structure.</p></article>
+      <article class="step reveal"><span class="step-number">03</span><h3>Build</h3><p>Develop the experience with speed, responsiveness and useful motion.</p></article>
+      <article class="step reveal"><span class="step-number">04</span><h3>Launch</h3><p>Ship, measure, learn and keep making the digital presence better.</p></article>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="about"><div class="container"><div class="manifesto"><div class="eyebrow reveal">03 / About Veyro</div><div><p class="manifesto-big reveal">Small studio.<br><span style="color:var(--lime)">Big digital presence.</span><br>No template energy.</p><p class="manifesto-side reveal">VEYRO starts lean on purpose. Faster decisions, closer collaboration and websites built around the actual business instead of a recycled agency layout.</p></div></div><div class="about-grid"><article class="about-card reveal"><div class="eyebrow">Why Veyro</div><h3>Built around the business.</h3><p>No giant agency layers. The focus is simple: make the business easier to understand, trust and contact online.</p></article><article class="about-card reveal"><div class="eyebrow">Founder</div><h3>Mohd Salim</h3><p>Independent web developer building Veyro with AI-assisted development, design experimentation and a growth mindset.</p></article></div></div></section>
+<section class="section" id="playground"><div class="container"><div class="section-head reveal"><div><div class="eyebrow">05 / Veyro Playground</div><h2 class="section-title">Tiny experiments.<br>Big personality.</h2></div><p class="section-intro">The expansion point for interactive demos, AI utilities and client-facing tools.</p></div><div class="play-grid"><article class="experiment reveal"><div class="exp-orb"></div><div class="eyebrow">01 / Hover</div><h3>Reactive Surface</h3><p>Move your pointer over this card. The interface responds.</p></article><article class="experiment reveal"><div class="eyebrow">02 / System</div><h3>AI-ready</h3><p class="terminal"><b>STATUS:</b> modular<br><b>MODE:</b> expandable<br><b>STACK:</b> web + AI</p></article><article class="experiment reveal"><div class="eyebrow">03 / Next</div><h3>Tool Lab</h3><p>Future slot for calculators, generators, AI utilities and interactive client experiences.</p><button class="btn" id="toolPreview">Open preview ↗</button></article></div></div></section>
+<section class="section"><div class="container"><div class="section-head reveal"><div><div class="eyebrow">06 / FAQ</div><h2 class="section-title">Questions, answered.</h2></div><p class="section-intro">Short answers now. A searchable knowledge base can grow here later.</p></div><div class="faq"><div class="faq-item"><button class="faq-q">Do you only work with interior designers?<span>+</span></button><div class="faq-a">No. Interior designers are the initial focus because the niche has strong visual value. Veyro can expand into architects, home services and other local businesses.</div></div><div class="faq-item"><button class="faq-q">Can you redesign an existing website?<span>+</span></button><div class="faq-a">Yes. Veyro can audit an existing site, identify friction and rebuild the experience without forcing a business to start from zero.</div></div><div class="faq-item"><button class="faq-q">Can the website be expanded later?<span>+</span></button><div class="faq-a">Yes. New pages, case studies, blogs, tools, forms, analytics and integrations can be added without rebuilding the whole front end.</div></div><div class="faq-item"><button class="faq-q">How do enquiries work?<span>+</span></button><div class="faq-a">The current build prepares a structured enquiry and can open a prefilled WhatsApp message. A real backend or automation endpoint can be connected later.</div></div></div></div></section>
+<section class="contact" id="contact"><div class="container contact-grid"><div class="reveal"><div class="eyebrow">07 / Start a project</div><h2>Tell us what<br>you're building.</h2><p class="contact-copy">A short qualification form keeps the first conversation useful instead of turning it into paperwork.</p><div class="contact-links"><a class="btn primary" id="waTop" href="#" target="_blank" rel="noopener">WhatsApp ↗</a><a class="btn" href="mailto:hello.veyro@gmail.com">Email Veyro ↗</a></div></div><form id="leadForm" class="reveal"><div class="field"><label>Name</label><input name="name" required placeholder="Your name"></div><div class="field"><label>Business</label><input name="business" required placeholder="Business name"></div><div class="field"><label>Business type</label><select name="type"><option>Interior Design</option><option>Architecture</option><option>Home / Local Service</option><option>Professional Service</option><option>Other</option></select></div><div class="field"><label>What do you need?</label><select name="need"><option>New website</option><option>Website redesign</option><option>Landing page</option><option>Website + local SEO</option><option>AI / automation</option></select></div><div class="field"><label>Budget range</label><select name="budget"><option>Not decided</option><option>Under ₹10,000</option><option>₹10,000–₹25,000</option><option>₹25,000–₹50,000</option><option>₹50,000+</option></select></div><div class="field"><label>Project details</label><textarea name="details" placeholder="Tell us what you want to build..."></textarea></div><div class="actions"><button class="btn primary" type="submit">Prepare enquiry ↗</button></div><div class="form-status" id="formStatus"></div></form></div></section>
+
+<section class="cta" id="contact">
+  <div class="container cta-inner reveal">
+    <div class="eyebrow">05 / Your next move</div>
+    <h2>LET'S BUILD<br>SOMETHING <span>UNEXPECTED.</span></h2>
+    <a class="btn primary magnetic" href="mailto:hello.veyro@gmail.com">hello.veyro@gmail.com ↗</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>© 2026 VEYRO / Web & Digital Studio</div>
+    <div class="footer-links"><a href="#work">Work</a><a href="#services">Services</a><a href="#contact">Contact</a></div>
+  </div>
+</footer>
+
+<script>
+const progress=document.querySelector('.progress'), nav=document.querySelector('#nav');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-innerHeight;
+  progress.style.width=(scrollY/h*100)+'%';
+  nav.classList.toggle('scrolled',scrollY>30);
+},{passive:true});
+
+const reveals=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');reveals.unobserve(e.target)}})
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4)*70+'ms';reveals.observe(el)});
+
+const cursor=document.querySelector('.cursor'), dot=document.querySelector('.cursor-dot');
+let mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my;
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+function cursorLoop(){cx+=(mx-cx)*.18;cy+=(my-cy)*.18;cursor.style.left=cx+'px';cursor.style.top=cy+'px';dot.style.left=mx+'px';dot.style.top=my+'px';requestAnimationFrame(cursorLoop)}
+cursorLoop();
+document.querySelectorAll('a,button,.service,.project').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='55px';cursor.style.height='55px';cursor.style.background='rgba(255,255,255,.08)'});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='34px';cursor.style.height='34px';cursor.style.background='transparent'});
+});
+
+document.querySelectorAll('.magnetic').forEach(el=>{
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;
+    el.style.transform=`translate(${x*.16}px,${y*.16}px)`;
+  });
+  el.addEventListener('mouseleave',()=>el.style.transform='');
+});
+
+document.querySelectorAll('.tilt').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`perspective(900px) rotateX(${-y*4}deg) rotateY(${x*5}deg)`;
+  });
+  card.addEventListener('mouseleave',()=>card.style.transform='');
+});
+
+const WHATSAPP_NUMBER="919999999999"; // Replace with the real Veyro WhatsApp number.
+const waLink=`https://wa.me/${WHATSAPP_NUMBER}`; const wa=document.getElementById('waTop'); if(wa) wa.href=waLink;
+document.querySelectorAll('.service').forEach(s=>s.addEventListener('click',()=>s.classList.toggle('open')));
+document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>{const i=q.parentElement;i.classList.toggle('open');q.querySelector('span').textContent=i.classList.contains('open')?'−':'+'}));
+document.getElementById('leadForm')?.addEventListener('submit',e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.target).entries());const msg=`Hi VEYRO, I'm ${d.name} from ${d.business}.\n\nBusiness type: ${d.type}\nNeed: ${d.need}\nBudget: ${d.budget}\n\nProject details:\n${d.details||'Not provided'}`;localStorage.setItem('veyro_last_lead',JSON.stringify({...d,createdAt:new Date().toISOString()}));document.getElementById('formStatus').textContent='Enquiry prepared. Opening WhatsApp...';window.open(`${waLink}?text=${encodeURIComponent(msg)}`,'_blank','noopener')});
+const modal=document.getElementById('modal');document.getElementById('toolPreview')?.addEventListener('click',()=>modal.classList.add('open'));document.getElementById('modalClose')?.addEventListener('click',()=>modal.classList.remove('open'));modal?.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});document.querySelectorAll('.modal-option').forEach(b=>b.addEventListener('click',()=>{alert(b.dataset.demo+' is reserved for the next Veyro Playground build.')}));
+</script>
+<div class="modal" id="modal"><div class="modal-box"><button class="modal-close" id="modalClose">×</button><div class="eyebrow">Veyro Playground</div><h2>Choose your experiment.</h2><p>This is the expansion point for future interactive tools and AI utilities.</p><div class="modal-options"><button class="modal-option" data-demo="AI Website Brief"><b>AI Brief</b><span>Turn business answers into a website brief.</span></button><button class="modal-option" data-demo="Lead Score"><b>Lead Score</b><span>Qualify a prospect before the call.</span></button><button class="modal-option" data-demo="SEO Snapshot"><b>SEO Snapshot</b><span>Prepare a local visibility checklist.</span></button><button class="modal-option" data-demo="Palette Lab"><b>Palette Lab</b><span>Generate a visual direction for a brand.</span></button></div></div></div>
+</body>
+</html>
