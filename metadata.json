@@ -1,0 +1,8 @@
+{
+  "name": "VEYRO — Web & Digital Studio",
+  "description": "Built to be noticed. Designed to convert. Modern websites and digital experiences for businesses ready to turn attention into enquiries in Delhi NCR and beyond.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
