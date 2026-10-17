@@ -105,12 +105,9 @@ export const studioConfig: StudioConfig = {
       getEnv('VITE_SITE_URL') || 
       getEnv('VITE_CANONICAL_URL') || 
       getEnv('VITE_PRODUCTION_DOMAIN') || 
-      'https://veyro.example'
+      'https://veyro.obliq.workers.dev'
     ).replace(/\/+$/, ''),
-    isProductionDomain: Boolean(
-      (getEnv('VITE_REAL_DOMAIN') || getEnv('VITE_SITE_URL') || getEnv('VITE_CANONICAL_URL') || getEnv('VITE_PRODUCTION_DOMAIN')) &&
-      !(getEnv('VITE_REAL_DOMAIN') || getEnv('VITE_SITE_URL') || getEnv('VITE_CANONICAL_URL') || getEnv('VITE_PRODUCTION_DOMAIN'))?.includes('example')
-    ),
+    isProductionDomain: true,
   },
   social: {
     // All social links default to null until confirmed.

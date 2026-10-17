@@ -4,4 +4,4 @@ Allow: /
 Disallow: /lab
 
 # Sitemap Index (Configurable via production domain deployment)
-Sitemap: https://veyro.example/sitemap.xml
+Sitemap: https://veyro.obliq.workers.dev/sitemap.xml

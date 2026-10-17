@@ -2,77 +2,77 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Core Studio Pages -->
   <url>
-    <loc>https://veyro.example/</loc>
+    <loc>https://veyro.obliq.workers.dev/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://veyro.example/services</loc>
+    <loc>https://veyro.obliq.workers.dev/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://veyro.example/work</loc>
+    <loc>https://veyro.obliq.workers.dev/work</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://veyro.example/work/arcline-studio</loc>
+    <loc>https://veyro.obliq.workers.dev/work/arcline-studio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://veyro.example/work/noire</loc>
+    <loc>https://veyro.obliq.workers.dev/work/noire</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://veyro.example/work/kavo</loc>
+    <loc>https://veyro.obliq.workers.dev/work/kavo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://veyro.example/process</loc>
+    <loc>https://veyro.obliq.workers.dev/process</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://veyro.example/about</loc>
+    <loc>https://veyro.obliq.workers.dev/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://veyro.example/blog</loc>
+    <loc>https://veyro.obliq.workers.dev/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://veyro.example/blog/why-interior-designers-need-more-than-instagram</loc>
+    <loc>https://veyro.obliq.workers.dev/blog/why-interior-designers-need-more-than-instagram</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://veyro.example/blog/what-makes-a-website-convert-visitors-into-enquiries</loc>
+    <loc>https://veyro.obliq.workers.dev/blog/what-makes-a-website-convert-visitors-into-enquiries</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://veyro.example/blog/web-design-vs-web-development-what-businesses-need</loc>
+    <loc>https://veyro.obliq.workers.dev/blog/web-design-vs-web-development-what-businesses-need</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://veyro.example/contact</loc>
+    <loc>https://veyro.obliq.workers.dev/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://veyro.example/privacy</loc>
+    <loc>https://veyro.obliq.workers.dev/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://veyro.example/terms</loc>
+    <loc>https://veyro.obliq.workers.dev/terms</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
