@@ -3,14 +3,20 @@ import { RoutePath } from '../types';
 import { Button } from '../components/Button';
 import { FileCheck, ArrowLeft, ShieldCheck } from 'lucide-react';
 import { studioConfig } from '../config/studio';
+import { usePageSEO } from '../utils/seo';
 
 export interface TermsPageProps {
   onNavigate: (path: RoutePath) => void;
 }
 
 export const TermsPage: FC<TermsPageProps> = ({ onNavigate }) => {
+  usePageSEO({
+    title: 'Terms of Service — VEYRO Web & Digital Studio',
+    description: 'Commercial terms and intellectual property framework governing web engineering and digital design commissions with VEYRO.',
+    path: '/terms',
+  });
+
   useEffect(() => {
-    document.title = 'Terms of Service — VEYRO Web & Digital Studio';
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 

@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { SectionHeader } from '../components/SectionHeader';
 import { Button } from '../components/Button';
+import { usePageSEO } from '../utils/seo';
 import { RoutePath } from '../types';
 import { 
   CheckCircle2, 
@@ -28,6 +29,12 @@ export interface ProcessStage {
 }
 
 export const ProcessPage: FC<ProcessPageProps> = ({ onNavigate }) => {
+  usePageSEO({
+    title: 'Our Process & Delivery System — VEYRO Studio',
+    description: 'Seven disciplined stages from discovery and strategy to design, clean TypeScript build, testing, and launch. Transparent, milestone-driven delivery.',
+    path: '/process',
+    image: '/images/veyro_process_craft_1792116635793.jpg',
+  });
   const [activeStageIndex, setActiveStageIndex] = useState<number>(0);
 
   const stages: ProcessStage[] = [
@@ -192,8 +199,10 @@ export const ProcessPage: FC<ProcessPageProps> = ({ onNavigate }) => {
           <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#111113] relative shadow-2xl group">
             <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0B0B0D]">
               <img
-                src="/src/assets/images/veyro_process_craft_1792116635793.jpg"
+                src="/images/veyro_process_craft_1792116635793.jpg"
                 alt="Tactile Architectural Model Craft and Typography Specimen Process"
+                width={1920}
+                height={1080}
                 className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                 referrerPolicy="no-referrer"
                 loading="eager"

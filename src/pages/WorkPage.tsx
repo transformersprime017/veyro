@@ -4,6 +4,7 @@ import { Button } from '../components/Button';
 import { ProjectTiltCard } from '../components/ProjectTiltCard';
 import { portfolioProjects } from '../data/portfolio';
 import { studioAchievements } from '../data/achievements';
+import { usePageSEO } from '../utils/seo';
 import { RoutePath } from '../types';
 import { 
   ArrowRight, 
@@ -22,6 +23,12 @@ type MainFilterTab = 'all' | 'projects' | 'concepts' | 'achievements';
 export const WorkPage: FC<WorkPageProps> = ({ onNavigate }) => {
   const [activeTab, setActiveTab] = useState<MainFilterTab>('all');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+
+  usePageSEO({
+    title: 'Work & Portfolio — VEYRO Web & Digital Studio',
+    description: 'Explore VEYRO\'s curated portfolio of architectural digital experiences, concept case studies, and engineering achievements in Delhi NCR.',
+    path: '/work',
+  });
 
   // Derive all unique project categories for the secondary filter
   const categories = useMemo(() => {

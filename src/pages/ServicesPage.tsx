@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { SectionHeader } from '../components/SectionHeader';
 import { Button } from '../components/Button';
 import { studioServices } from '../data/services';
+import { usePageSEO } from '../utils/seo';
 import { RoutePath } from '../types';
 import { 
   CheckCircle2, 
@@ -23,6 +24,12 @@ export interface ServicesPageProps {
 
 export const ServicesPage: FC<ServicesPageProps> = ({ onNavigate }) => {
   const [selectedService, setSelectedService] = useState<number>(0);
+
+  usePageSEO({
+    title: 'Bespoke Web Design & Development Services — VEYRO Studio',
+    description: 'Six core pillars of digital craft: Bespoke Web Design, Web Development, Digital Strategy, Local Growth, AI Systems, and Frontend Engineering in Delhi NCR.',
+    path: '/services',
+  });
 
   const serviceIcons = [
     <Compass key="1" className="w-5 h-5 text-[#C7FF3D]" />,

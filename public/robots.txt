@@ -1,0 +1,7 @@
+# VEYRO Web & Digital Studio - Robots Exclusion Standard
+User-agent: *
+Allow: /
+Disallow: /lab
+
+# Sitemap Index (Configurable via production domain deployment)
+Sitemap: https://veyro.example/sitemap.xml

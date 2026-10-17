@@ -29,7 +29,7 @@ export const journalArticles: JournalArticle[] = [
     readTime: '6 min read',
     status: 'published',
     featured: true,
-    coverImage: '/src/assets/images/journal_interior_1792039678760.jpg',
+    coverImage: '/images/journal_interior_1792039678760.jpg',
     seoTitle: 'Why Interior Designers Need an Owned Website | VEYRO Journal',
     seoDescription:
       'Learn why relying solely on Instagram limits luxury interior design practices in Delhi NCR and how an owned digital showroom converts high-ticket residential clients.',
@@ -89,7 +89,7 @@ export const journalArticles: JournalArticle[] = [
     readTime: '5 min read',
     status: 'published',
     featured: false,
-    coverImage: '/src/assets/images/journal_conversion_1792039714477.jpg',
+    coverImage: '/images/journal_conversion_1792039714477.jpg',
     seoTitle: 'What Makes Websites Convert Visitors Into Inquiries | VEYRO Journal',
     seoDescription:
       'Discover the practical architectural factors that turn website visitors into qualified project inquiries without aggressive popups or generic template bloat.',
@@ -142,7 +142,7 @@ export const journalArticles: JournalArticle[] = [
     readTime: '7 min read',
     status: 'published',
     featured: false,
-    coverImage: '/src/assets/images/journal_engineering_1792081412544.jpg',
+    coverImage: '/images/journal_engineering_1792081412544.jpg',
     seoTitle: 'Web Design vs Web Development Explained | VEYRO Journal',
     seoDescription:
       'Understand the crucial difference between visual Figma design and production frontend engineering, and why successful businesses need both working in harmony.',
@@ -202,6 +202,13 @@ export function getFeaturedArticle(): JournalArticle | undefined {
 }
 
 export function getArticleBySlug(slug: string): JournalArticle | undefined {
+  // Support slug aliases to preserve crawlability for legacy or alternate links
+  if (slug === 'what-makes-websites-convert-visitors-into-inquiries') {
+    return journalArticles.find((a) => a.slug === 'what-makes-a-website-convert-visitors-into-enquiries');
+  }
+  if (slug === 'web-design-vs-web-development-why-both-matter') {
+    return journalArticles.find((a) => a.slug === 'web-design-vs-web-development-what-businesses-need');
+  }
   return journalArticles.find((a) => a.slug === slug);
 }
 

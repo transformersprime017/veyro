@@ -1,6 +1,5 @@
 import { FC, useState, useEffect } from 'react';
 import { Logo } from './Logo';
-import { Button } from './Button';
 import { RoutePath } from '../types';
 
 export interface NavigationProps {
@@ -47,7 +46,6 @@ export const Navigation: FC<NavigationProps> = ({ currentPath, onNavigate }) => 
     { label: 'Work', path: '/work' },
     { label: 'Services', path: '/services' },
     { label: 'Process', path: '/process' },
-    { label: 'Lab', path: '/lab', badge: 'Tools' },
     { label: 'About', path: '/about' },
     { label: 'Journal', path: '/blog' },
   ];
@@ -84,10 +82,13 @@ export const Navigation: FC<NavigationProps> = ({ currentPath, onNavigate }) => 
             {navLinks.map((item) => {
               const isActive = currentPath === item.path || (item.path !== '/' && currentPath.startsWith(item.path));
               return (
-                <button
+                <a
                   key={item.path}
-                  type="button"
-                  onClick={() => handleLinkClick(item.path)}
+                  href={item.path}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLinkClick(item.path);
+                  }}
                   className={`group relative py-1 transition-colors hover:text-[#C7FF3D] cursor-pointer focus-visible:ring-1 focus-visible:ring-[#C7FF3D] rounded-xs ${
                     isActive ? 'text-[#C7FF3D] font-medium' : 'text-[#D9D4C7]'
                   }`}
@@ -104,21 +105,23 @@ export const Navigation: FC<NavigationProps> = ({ currentPath, onNavigate }) => 
                   {isActive && (
                     <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#C7FF3D] rounded-full shadow-[0_0_8px_#C7FF3D]" />
                   )}
-                </button>
+                </a>
               );
             })}
           </nav>
 
           {/* Desktop Right CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={() => handleLinkClick('/contact')}
-              className="text-xs"
+            <a
+              href="/contact"
+              onClick={(e) => {
+                e.preventDefault();
+                handleLinkClick('/contact');
+              }}
+              className="inline-flex items-center justify-center font-display font-medium transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C7FF3D] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0D] bg-[#C7FF3D] text-[#0B0B0D] hover:bg-[#d4ff63] active:bg-[#b2eb2d] shadow-[0_0_20px_rgba(199,255,61,0.25)] hover:shadow-[0_0_28px_rgba(199,255,61,0.4)] px-4 py-2 text-xs rounded-sm cursor-pointer"
             >
               Start a project ↗
-            </Button>
+            </a>
           </div>
 
           {/* Mobile Hamburger Toggle */}
@@ -126,7 +129,7 @@ export const Navigation: FC<NavigationProps> = ({ currentPath, onNavigate }) => 
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-[#F3F0E8] hover:text-[#C7FF3D] transition-colors focus-visible:ring-2 focus-visible:ring-[#C7FF3D] rounded"
+              className="p-2 text-[#F3F0E8] hover:text-[#C7FF3D] transition-colors focus-visible:ring-2 focus-visible:ring-[#C7FF3D] rounded cursor-pointer"
               aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"
@@ -160,33 +163,39 @@ export const Navigation: FC<NavigationProps> = ({ currentPath, onNavigate }) => 
               {navLinks.map((item) => {
                 const isActive = currentPath === item.path;
                 return (
-                  <button
+                  <a
                     key={item.path}
-                    type="button"
-                    onClick={() => handleLinkClick(item.path)}
-                    className={`flex items-center justify-between text-2xl font-display font-medium text-left transition-colors ${
+                    href={item.path}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleLinkClick(item.path);
+                    }}
+                    className={`flex items-center justify-between text-2xl font-display font-medium text-left transition-colors cursor-pointer ${
                       isActive ? 'text-[#C7FF3D]' : 'text-[#F3F0E8] hover:text-[#C7FF3D]'
                     }`}
+                    aria-current={isActive ? 'page' : undefined}
                   >
                     <span>{item.label}</span>
                     <span className="text-xs font-mono text-zinc-500">
                       {item.badge ? `[${item.badge}]` : '↗'}
                     </span>
-                  </button>
+                  </a>
                 );
               })}
             </nav>
           </div>
 
           <div className="border-t border-white/10 pt-6 space-y-4">
-            <Button
-              variant="primary"
-              size="lg"
-              className="w-full justify-center"
-              onClick={() => handleLinkClick('/contact')}
+            <a
+              href="/contact"
+              onClick={(e) => {
+                e.preventDefault();
+                handleLinkClick('/contact');
+              }}
+              className="w-full inline-flex items-center justify-center font-display font-medium transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C7FF3D] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0D] bg-[#C7FF3D] text-[#0B0B0D] hover:bg-[#d4ff63] active:bg-[#b2eb2d] shadow-[0_0_20px_rgba(199,255,61,0.25)] hover:shadow-[0_0_28px_rgba(199,255,61,0.4)] px-6 py-3.5 text-sm rounded-sm cursor-pointer"
             >
               Start a project ↗
-            </Button>
+            </a>
             <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500">
               <span>DELHI NCR · WEB & DIGITAL STUDIO</span>
               <span>© 2026 VEYRO</span>

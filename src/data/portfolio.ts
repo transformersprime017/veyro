@@ -20,8 +20,8 @@ export const portfolioProjects: PortfolioProject[] = [
     subtitle: 'High-end interior architecture and spatial design practice in Delhi NCR.',
     category: 'Interior Design',
     tags: ['Spatial Design', 'Luxury Residential', 'Delhi NCR', 'Conversion Funnel'],
-    coverImage: '/src/assets/images/arcline_studio_cover_1792039501317.jpg',
-    gallery: ['/src/assets/images/arcline_detail_1792039518953.jpg'],
+    coverImage: '/images/arcline_studio_cover_1792039501317.jpg',
+    gallery: ['/images/arcline_detail_1792039518953.jpg'],
     projectType: 'concept',
     status: 'concept',
     featured: true,
@@ -35,7 +35,7 @@ export const portfolioProjects: PortfolioProject[] = [
       'Replace bloated, image-heavy WordPress templates with an instantaneous, modern frontend.',
       'Convert casual Instagram and Pinterest attention into qualified interior design consultations.',
     ],
-    conceptDisclosure: 'This is an architectural concept case study engineered by VEYRO to demonstrate spatial design excellence and high-ticket consultation conversion. It is not an active commercial client endorsement.',
+    conceptDisclosure: 'This is a fictional interior-design website concept case study engineered by VEYRO to demonstrate spatial design excellence and high-ticket consultation conversion. It is not an active commercial client endorsement.',
     caseStudy: {
       overview:
         'ARCLINE STUDIO was created to solve a persistent dilemma in the Delhi NCR interior design sector: studios invest months crafting breathtaking physical spaces with Italian marble, custom joinery, and tailored lighting, only to send prospective clients to slow, generic template websites that fail to reflect that craft.',
@@ -83,8 +83,8 @@ export const portfolioProjects: PortfolioProject[] = [
     subtitle: 'Bespoke luxury fashion label, editorial runway styling, and private salon collection.',
     category: 'Luxury Fashion',
     tags: ['Haute Couture', 'Editorial Web', 'Private Salons', 'VIP Concierge'],
-    coverImage: '/src/assets/images/noire_cover_1792039565436.jpg',
-    gallery: ['/src/assets/images/noire_detail_1792039589374.jpg'],
+    coverImage: '/images/noire_cover_1792039565436.jpg',
+    gallery: ['/images/noire_detail_1792039589374.jpg'],
     projectType: 'concept',
     status: 'concept',
     featured: true,
@@ -98,7 +98,7 @@ export const portfolioProjects: PortfolioProject[] = [
       'Facilitate private atelier salon appointments and VIP lookbook requests.',
       'Eliminate visual clutter to let garment silhouettes and fabric textures command focus.',
     ],
-    conceptDisclosure: 'This is an editorial concept case study engineered by VEYRO to demonstrate high-end luxury fashion art direction, typographic restraint, and private salon booking workflows.',
+    conceptDisclosure: 'This is a fictional fashion and lifestyle concept case study engineered by VEYRO to demonstrate high-end luxury fashion art direction, typographic restraint, and private salon booking workflows. It is not an active commercial client endorsement.',
     caseStudy: {
       overview:
         'NOIRÉ demonstrates how luxury fashion labels can present seasonal collections with the gravitas of an international gallery exhibition. Rather than treating an online collection like a commodity e-commerce catalog, NOIRÉ treats every garment as an architectural sculpture.',
@@ -142,11 +142,11 @@ export const portfolioProjects: PortfolioProject[] = [
     id: 'proj-kavo',
     slug: 'kavo',
     title: 'KAVO',
-    subtitle: 'Artisanal roastery, specialty café culture, and urban community gathering space.',
+    subtitle: 'Artisanal roastery, specialty café culture, and urban community gathering space (self-initiated practice demo: Bean & Bite Coffee & Bakery).',
     category: 'Café & Hospitality',
-    tags: ['Specialty Coffee', 'Urban Roastery', 'Local Hospitality', 'Footfall Conversion'],
-    coverImage: '/src/assets/images/kavo_cover_1792039615820.jpg',
-    gallery: ['/src/assets/images/kavo_detail_1792039643508.jpg'],
+    tags: ['Specialty Coffee', 'Urban Roastery', 'Local Hospitality', 'Footfall Conversion', 'Bean & Bite'],
+    coverImage: '/images/kavo_cover_1792039615820.jpg',
+    gallery: ['/images/kavo_detail_1792039643508.jpg'],
     projectType: 'concept',
     status: 'concept',
     featured: true,
@@ -160,7 +160,7 @@ export const portfolioProjects: PortfolioProject[] = [
       'Showcase seasonal single-origin roasts with interactive tasting profiles.',
       'Provide instant, location-aware operating hours and 1-tap navigation directions.',
     ],
-    conceptDisclosure: 'This is a hospitality concept case study engineered by VEYRO to demonstrate local search discovery, tactile menu interaction, and footfall conversion for specialty food & beverage brands.',
+    conceptDisclosure: 'This is a self-initiated practice/demo project (Bean & Bite Coffee & Bakery / KAVO) engineered by VEYRO to demonstrate local search discovery, tactile menu interaction, and footfall conversion for specialty food & beverage brands. It is not an active commercial client endorsement.',
     caseStudy: {
       overview:
         'KAVO explores how independent hospitality brands can reclaim their customer relationship from third-party delivery apps and social algorithms. By building an owned digital hub with live seating indicators and tasting profiles, KAVO turns online visitors into in-person customers.',
@@ -230,6 +230,9 @@ export function getAllProjects(): PortfolioProject[] {
 }
 
 export function getProjectBySlug(slug: string): PortfolioProject | undefined {
+  if (slug === 'bean-and-bite' || slug === 'bean-and-bite-coffee-and-bakery') {
+    return portfolioProjects.find((p) => p.slug === 'kavo');
+  }
   return portfolioProjects.find((p) => p.slug === slug);
 }
 

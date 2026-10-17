@@ -35,12 +35,21 @@ export const Logo: FC<LogoProps> = ({
   };
 
   const content = (() => {
+    const pxSizes = {
+      sm: 24,
+      md: 32,
+      lg: 40,
+      xl: 56,
+    };
+
     if (variant === 'icon') {
       return (
         <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
           <img
-            src="/BRAND/LOGO/VEYRO-Icon-V.svg"
+            src="/logo.svg"
             alt="VEYRO Monogram"
+            width={pxSizes[size]}
+            height={pxSizes[size]}
             className={`${iconSizes[size]} object-contain select-none`}
             loading="eager"
             decoding="async"
@@ -54,8 +63,10 @@ export const Logo: FC<LogoProps> = ({
     return (
       <div className={`inline-flex items-center gap-3 select-none ${className}`}>
         <img
-          src="/BRAND/LOGO/VEYRO-Icon-V.svg"
+          src="/logo.svg"
           alt="VEYRO"
+          width={pxSizes[size]}
+          height={pxSizes[size]}
           className={`${iconSizes[size]} object-contain select-none`}
           loading="eager"
           decoding="async"

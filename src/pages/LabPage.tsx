@@ -5,6 +5,7 @@ import { BriefBuilderTool } from '../components/lab/BriefBuilderTool';
 import { LeadScoreTool } from '../components/lab/LeadScoreTool';
 import { SeoSnapshotTool } from '../components/lab/SeoSnapshotTool';
 import { PaletteLabTool } from '../components/lab/PaletteLabTool';
+import { usePageSEO } from '../utils/seo';
 import { RoutePath } from '../types';
 import { 
   Cpu, 
@@ -26,6 +27,13 @@ type ActiveLabTool = 'none' | 'brief' | 'lead-score' | 'seo' | 'palette';
 
 export const LabPage: FC<LabPageProps> = ({ onNavigate }) => {
   const [activeTool, setActiveTool] = useState<ActiveLabTool>('none');
+
+  usePageSEO({
+    title: 'VEYRO Lab — Private Digital Workbench',
+    description: 'Internal interactive studio utilities, conversion diagnostics, and experimental design prototypes.',
+    path: '/lab',
+    robots: 'noindex, nofollow',
+  });
 
   const tools = [
     {
@@ -109,8 +117,10 @@ export const LabPage: FC<LabPageProps> = ({ onNavigate }) => {
           <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#111113] relative shadow-2xl group">
             <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0B0B0D]">
               <img
-                src="/src/assets/images/veyro_lab_visual_1792116636014.jpg"
+                src="/images/veyro_lab_visual_1792116636014.jpg"
                 alt="VEYRO Experimental Creative Technology and Algorithmic Geometry Installation"
+                width={1920}
+                height={1080}
                 className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                 referrerPolicy="no-referrer"
                 loading="eager"

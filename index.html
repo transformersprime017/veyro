@@ -6,19 +6,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VEYRO — Web & Digital Studio</title>
     <meta name="description" content="Built to be noticed. Designed to convert. Modern websites and digital experiences for businesses ready to turn attention into enquiries in Delhi NCR and beyond." />
-    
-    <!-- Open Graph -->
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://veyro.example/" />
+
+    <!-- Open Graph Metadata -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="VEYRO" />
     <meta property="og:title" content="VEYRO — Web & Digital Studio" />
     <meta property="og:description" content="Built to be noticed. Designed to convert. Modern websites and digital experiences for businesses ready to turn attention into enquiries." />
-    <meta property="og:image" content="/ORIGINAL_VEYRO_REFERENCE/og.svg" />
-    
+    <meta property="og:url" content="https://veyro.example/" />
+    <meta property="og:image" content="/og.svg" />
+
+    <!-- Twitter / X Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="VEYRO — Web & Digital Studio" />
+    <meta name="twitter:description" content="Built to be noticed. Designed to convert. Modern websites and digital experiences for businesses ready to turn attention into enquiries." />
+    <meta name="twitter:image" content="/og.svg" />
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Schema.org Base Structured Data (Pre-rendered for crawlers) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://veyro.example/#website",
+          "url": "https://veyro.example/",
+          "name": "VEYRO Web & Digital Studio",
+          "description": "Bespoke websites and digital experiences built to be noticed and designed to convert."
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://veyro.example/#organization",
+          "name": "VEYRO Web & Digital Studio",
+          "url": "https://veyro.example/",
+          "logo": "https://veyro.example/favicon.svg",
+          "image": "https://veyro.example/og.svg",
+          "description": "Independent Web & Digital Studio engineering bespoke websites, spatial web experiences, and conversion systems for interior designers and modern businesses in Delhi NCR.",
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": "Delhi NCR, India"
+          },
+          "knowsAbout": [
+            "Bespoke Web Design",
+            "React & TypeScript Engineering",
+            "Digital Strategy & Information Architecture",
+            "Conversion Funnel Architecture",
+            "Local Search Optimization"
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body class="bg-[#0B0B0D] text-[#F3F0E8] antialiased selection:bg-[#C7FF3D] selection:text-[#0B0B0D]">
+    <noscript>
+      <div style="padding: 2rem; max-width: 800px; margin: 0 auto; font-family: sans-serif; color: #F3F0E8; background: #0B0B0D;">
+        <h1>VEYRO — Web & Digital Studio</h1>
+        <p>Built to be noticed. Designed to convert. Modern websites and digital experiences for businesses ready to turn attention into enquiries in Delhi NCR and beyond.</p>
+        <nav aria-label="Studio Navigation">
+          <ul>
+            <li><a href="/work">Work & Portfolio</a></li>
+            <li><a href="/services">Services & Capabilities</a></li>
+            <li><a href="/process">Process & Delivery</a></li>
+            <li><a href="/about">About the Studio</a></li>
+            <li><a href="/blog">Journal & Perspectives</a></li>
+            <li><a href="/contact">Commission an Enquiry</a></li>
+          </ul>
+        </nav>
+      </div>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

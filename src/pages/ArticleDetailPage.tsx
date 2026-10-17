@@ -2,6 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import { RoutePath } from '../types';
 import { getArticleBySlug, getRelatedArticles } from '../data/articles';
 import { Button } from '../components/Button';
+import { usePageSEO, getCanonicalOrigin } from '../utils/seo';
 import { 
   ArrowLeft, 
   Clock, 
@@ -22,60 +23,53 @@ export interface ArticleDetailPageProps {
 export const ArticleDetailPage: FC<ArticleDetailPageProps> = ({ slug, onNavigate }) => {
   const [copied, setCopied] = useState(false);
   const article = getArticleBySlug(slug);
+  const baseOrigin = getCanonicalOrigin();
 
-  // Dynamic SEO & Structured Data
-  useEffect(() => {
-    if (article) {
-      document.title = `${article.seoTitle || article.title} — VEYRO Journal`;
-      window.scrollTo({ top: 0, behavior: 'instant' });
-
-      // Add Schema.org JSON-LD Article structured data
-      const scriptId = 'veyro-article-ld-json';
-      let script = document.getElementById(scriptId) as HTMLScriptElement | null;
-      if (!script) {
-        script = document.createElement('script');
-        script.id = scriptId;
-        script.type = 'application/ld+json';
-        document.head.appendChild(script);
-      }
-
-      const ldJsonData = {
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: article.title,
-        description: article.summary,
-        articleSection: article.category,
-        keywords: article.tags.join(', '),
-        author: {
-          '@type': 'Organization',
-          name: article.author.name,
-          url: window.location.origin,
-        },
-        publisher: {
-          '@type': 'Organization',
-          name: 'VEYRO Web & Digital Studio',
-          logo: {
-            '@type': 'ImageObject',
-            url: `${window.location.origin}/BRAND/LOGO/VEYRO-Icon-V.svg`,
+  usePageSEO({
+    title: article
+      ? `${article.seoTitle || article.title} — VEYRO Journal`
+      : 'Perspective Not Found — VEYRO Journal',
+    description: article
+      ? article.seoDescription || article.summary
+      : 'The requested article could not be found in our journal perspectives directory.',
+    path: `/blog/${slug}`,
+    image: article?.coverImage || '/og.svg',
+    type: 'article',
+    robots: article ? 'index, follow' : 'noindex, nofollow',
+    schema: article
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: article.title,
+          description: article.summary,
+          articleSection: article.category,
+          keywords: article.tags.join(', '),
+          image: article.coverImage ? `${baseOrigin}${article.coverImage}` : `${baseOrigin}/og.svg`,
+          author: {
+            '@type': 'Organization',
+            name: article.author.name,
+            url: baseOrigin,
           },
-        },
-        datePublished: '2026-10-01',
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': `${window.location.origin}/blog/${article.slug}`,
-        },
-      };
-
-      script.textContent = JSON.stringify(ldJsonData);
-
-      return () => {
-        const existingScript = document.getElementById(scriptId);
-        if (existingScript) {
-          existingScript.remove();
+          publisher: {
+            '@type': 'Organization',
+            name: 'VEYRO Web & Digital Studio',
+            logo: {
+              '@type': 'ImageObject',
+              url: `${baseOrigin}/favicon.svg`,
+            },
+          },
+          datePublished: '2026-10-01',
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': `${baseOrigin}/blog/${article.slug}`,
+          },
         }
-      };
-    }
-  }, [article]);
+      : null,
+  });
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [slug]);
 
   const handleCopyLink = async () => {
     const url = window.location.href;
@@ -203,6 +197,8 @@ export const ArticleDetailPage: FC<ArticleDetailPageProps> = ({ slug, onNavigate
               <img
                 src={article.coverImage}
                 alt={article.title}
+                width={1920}
+                height={1080}
                 className="w-full h-full object-cover"
                 loading="eager"
                 referrerPolicy="no-referrer"
@@ -218,7 +214,7 @@ export const ArticleDetailPage: FC<ArticleDetailPageProps> = ({ slug, onNavigate
       )}
 
       {/* 3. Article Body Content */}
-      <main className="space-y-12 text-[#EDE9DD] leading-relaxed font-sans text-base sm:text-lg">
+      <article className="space-y-12 text-[#EDE9DD] leading-relaxed font-sans text-base sm:text-lg">
         {article.sections.map((section, idx) => (
           <section key={idx} className="space-y-6">
             {section.heading && (
@@ -269,7 +265,7 @@ export const ArticleDetailPage: FC<ArticleDetailPageProps> = ({ slug, onNavigate
             )}
           </section>
         ))}
-      </main>
+      </article>
 
       {/* 4. Tags Footer */}
       <div className="pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">

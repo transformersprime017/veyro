@@ -91,12 +91,28 @@ body::before {
   animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Accessible High-Contrast Focus Ring */
+:focus-visible {
+  outline: 2px solid #C7FF3D;
+  outline-offset: 3px;
+}
+
+/* Reduced Motion Preference Protection */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
   .animate-marquee {
-    animation: none;
+    animation: none !important;
     overflow-x: auto;
   }
   .animate-fadeIn {
-    animation: none;
+    animation: none !important;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

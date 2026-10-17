@@ -18,6 +18,59 @@ import { Compass, ArrowLeft } from 'lucide-react';
 import { portfolioProjects } from './data/portfolio';
 import { studioAchievements } from './data/achievements';
 import { validatePortfolioData } from './utils/portfolioValidator';
+import { usePageSEO } from './utils/seo';
+
+function NotFoundView({ currentPath, onNavigate }: { currentPath: string; onNavigate: (path: RoutePath) => void }) {
+  usePageSEO({
+    title: '404 // Page Not Found — VEYRO Studio',
+    description: 'The requested page does not exist or may have been moved. Return to the VEYRO Web & Digital Studio homepage or explore our work.',
+    path: currentPath,
+    robots: 'noindex, nofollow',
+  });
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-24 text-center space-y-8">
+      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#C7FF3D]/10 border border-[#C7FF3D]/30 text-[#C7FF3D] font-mono text-xs uppercase tracking-wider">
+        <Compass className="w-3.5 h-3.5" />
+        <span>404 // Page Not Found</span>
+      </div>
+
+      <h1 className="text-4xl sm:text-6xl font-display font-medium text-[#F3F0E8] tracking-tight">
+        Route <span className="text-[#C7FF3D]">{currentPath}</span> does not exist
+      </h1>
+
+      <p className="text-zinc-400 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+        The requested page may have been moved, renamed, or is currently unavailable. Explore our studio work or start a project enquiry below.
+      </p>
+
+      <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+        <Button
+          variant="primary"
+          size="md"
+          onClick={() => onNavigate('/')}
+          icon={<ArrowLeft className="w-4 h-4" />}
+          iconPosition="left"
+        >
+          Return to Home
+        </Button>
+        <Button
+          variant="secondary"
+          size="md"
+          onClick={() => onNavigate('/work')}
+        >
+          Explore Work Portfolio ↗
+        </Button>
+        <Button
+          variant="secondary"
+          size="md"
+          onClick={() => onNavigate('/contact')}
+        >
+          Start a Project ↗
+        </Button>
+      </div>
+    </div>
+  );
+}
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState<RoutePath>(() => {
@@ -114,48 +167,7 @@ export default function App() {
     }
 
     // 13. 404 / Route Fallback
-    return (
-      <div className="max-w-4xl mx-auto px-4 py-24 text-center space-y-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#C7FF3D]/10 border border-[#C7FF3D]/30 text-[#C7FF3D] font-mono text-xs uppercase tracking-wider">
-          <Compass className="w-3.5 h-3.5" />
-          <span>404 // Page Not Found</span>
-        </div>
-
-        <h1 className="text-4xl sm:text-6xl font-display font-medium text-[#F3F0E8] tracking-tight">
-          Route <span className="text-[#C7FF3D]">{currentPath}</span> does not exist
-        </h1>
-
-        <p className="text-zinc-400 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-          The requested page may have been moved, renamed, or is currently unavailable. Explore our studio work or start a project enquiry below.
-        </p>
-
-        <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-          <Button
-            variant="primary"
-            size="md"
-            onClick={() => handleNavigate('/')}
-            icon={<ArrowLeft className="w-4 h-4" />}
-            iconPosition="left"
-          >
-            Return to Home
-          </Button>
-          <Button
-            variant="secondary"
-            size="md"
-            onClick={() => handleNavigate('/work')}
-          >
-            Explore Work Portfolio ↗
-          </Button>
-          <Button
-            variant="secondary"
-            size="md"
-            onClick={() => handleNavigate('/contact')}
-          >
-            Start a Project ↗
-          </Button>
-        </div>
-      </div>
-    );
+    return <NotFoundView currentPath={currentPath} onNavigate={handleNavigate} />;
   };
 
   return (

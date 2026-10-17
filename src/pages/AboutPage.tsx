@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { SectionHeader } from '../components/SectionHeader';
 import { Button } from '../components/Button';
 import { studioConfig } from '../config/studio';
+import { usePageSEO } from '../utils/seo';
 import { RoutePath } from '../types';
 import { 
   Terminal, 
@@ -13,6 +14,12 @@ export interface AboutPageProps {
 }
 
 export const AboutPage: FC<AboutPageProps> = ({ onNavigate }) => {
+  usePageSEO({
+    title: 'About the Studio — VEYRO Web & Digital Studio',
+    description: 'Independent web design and engineering studio in Delhi NCR. Built on the conviction that modern businesses deserve bespoke, commanding digital experiences without template bloat.',
+    path: '/about',
+    image: '/images/veyro_studio_about_1792116635606.jpg',
+  });
   const principles = [
     {
       num: '01',
@@ -61,8 +68,10 @@ export const AboutPage: FC<AboutPageProps> = ({ onNavigate }) => {
           <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#111113] relative shadow-2xl group">
             <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0B0B0D]">
               <img
-                src="/src/assets/images/veyro_studio_about_1792116635606.jpg"
+                src="/images/veyro_studio_about_1792116635606.jpg"
                 alt="VEYRO Studio Workspace and Material Lab in Delhi NCR"
+                width={1920}
+                height={1080}
                 className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                 referrerPolicy="no-referrer"
                 loading="eager"

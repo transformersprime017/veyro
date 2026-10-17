@@ -2,6 +2,7 @@ import { FC, useState, useMemo, useEffect } from 'react';
 import { RoutePath } from '../types';
 import { getPublishedArticles, getFeaturedArticle } from '../data/articles';
 import { Button } from '../components/Button';
+import { usePageSEO } from '../utils/seo';
 import { 
   Search, 
   X, 
@@ -22,9 +23,13 @@ export const BlogPage: FC<BlogPageProps> = ({ onNavigate }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  // SEO document title sync
+  usePageSEO({
+    title: 'Journal & Perspectives — VEYRO Web & Digital Studio',
+    description: 'Architectural essays, conversion strategy guides, and engineering insights on web design for interior designers and modern businesses.',
+    path: '/blog',
+  });
+
   useEffect(() => {
-    document.title = 'Journal & Perspectives — VEYRO Web & Digital Studio';
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 

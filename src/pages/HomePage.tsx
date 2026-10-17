@@ -5,6 +5,7 @@ import { ProjectTiltCard } from '../components/ProjectTiltCard';
 import { studioServices } from '../data/services';
 import { conceptProjects } from '../data/portfolio';
 import { studioConfig, getEmailLink } from '../config/studio';
+import { usePageSEO, getCanonicalOrigin } from '../utils/seo';
 import { RoutePath } from '../types';
 import { 
   ArrowRight, 
@@ -24,6 +25,47 @@ export interface HomePageProps {
 export const HomePage: FC<HomePageProps> = ({ onNavigate }) => {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [activeServiceHover, setActiveServiceHover] = useState<number | null>(null);
+
+  const baseOrigin = getCanonicalOrigin();
+
+  usePageSEO({
+    title: 'VEYRO — Web & Digital Studio | Built to be noticed. Designed to convert.',
+    description: 'Modern websites and bespoke digital experiences for businesses ready to turn attention into enquiries in Delhi NCR and beyond.',
+    path: '/',
+    image: '/images/veyro_homepage_hero_1792116634810.jpg',
+    schema: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebSite',
+          '@id': `${baseOrigin}/#website`,
+          url: `${baseOrigin}/`,
+          name: 'VEYRO Web & Digital Studio',
+          description: 'Bespoke websites and digital experiences built to be noticed and designed to convert.',
+        },
+        {
+          '@type': 'ProfessionalService',
+          '@id': `${baseOrigin}/#organization`,
+          name: 'VEYRO Web & Digital Studio',
+          url: `${baseOrigin}/`,
+          logo: `${baseOrigin}/favicon.svg`,
+          image: `${baseOrigin}/images/veyro_homepage_hero_1792116634810.jpg`,
+          description: 'Independent Web & Digital Studio engineering bespoke websites, spatial web experiences, and conversion systems for interior designers and modern brands in Delhi NCR.',
+          areaServed: {
+            '@type': 'AdministrativeArea',
+            name: 'Delhi NCR, India',
+          },
+          knowsAbout: [
+            'Bespoke Web Design',
+            'React & TypeScript Engineering',
+            'Digital Strategy & Information Architecture',
+            'Conversion Funnel Architecture',
+            'Local Search Optimization',
+          ],
+        },
+      ],
+    },
+  });
 
   const faqs = [
     {
@@ -135,8 +177,10 @@ export const HomePage: FC<HomePageProps> = ({ onNavigate }) => {
             {/* High-Resolution Hero Visual */}
             <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0B0B0D]">
               <img
-                src="/src/assets/images/veyro_homepage_hero_1792116634810.jpg"
+                src="/images/veyro_homepage_hero_1792116634810.jpg"
                 alt="VEYRO Monolithic Digital Architecture Pavilion"
+                width={1920}
+                height={1080}
                 className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                 referrerPolicy="no-referrer"
                 loading="eager"

@@ -1,6 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 import { RoutePath, LeadFormData, SubmissionStatus, LeadSubmissionResult } from '../types';
 import { studioConfig, getWhatsAppLink } from '../config/studio';
+import { usePageSEO, getCanonicalOrigin } from '../utils/seo';
 import { 
   submitLeadEnquiry, 
   validateLeadForm, 
@@ -80,9 +81,29 @@ export const ContactPage: FC<ContactPageProps> = ({ onNavigate }) => {
   const [copiedBrief, setCopiedBrief] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
 
+  const baseOrigin = getCanonicalOrigin();
+
+  usePageSEO({
+    title: 'Commission an Enquiry — VEYRO Web & Digital Studio',
+    description: 'Discuss your digital architecture, bespoke web platform, or high-conversion frontend project with VEYRO Web & Digital Studio in Delhi NCR.',
+    path: '/contact',
+    schema: {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      name: 'Commission an Enquiry | VEYRO Web & Digital Studio',
+      description: 'Discuss your digital architecture, bespoke web platform, or high-conversion frontend project with VEYRO Web & Digital Studio in Delhi NCR.',
+      url: `${baseOrigin}/contact`,
+      publisher: {
+        '@type': 'Organization',
+        name: studioConfig.brand.name,
+        email: studioConfig.contact.email,
+        url: `${baseOrigin}/`,
+      },
+    },
+  });
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
-    document.title = 'Commission an Enquiry // VEYRO Web & Digital Studio';
   }, []);
 
   const handleInputChange = (field: keyof LeadFormData, value: string | boolean) => {
@@ -175,25 +196,6 @@ export const ContactPage: FC<ContactPageProps> = ({ onNavigate }) => {
       />
       <div className="absolute top-1/4 -right-48 w-96 h-96 bg-accent-gold/5 rounded-full blur-3xl pointer-events-none" />
 
-      {/* SEO Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ContactPage",
-            "name": "Commission an Enquiry | VEYRO",
-            "description": "Discuss your digital architecture, bespoke atelier platform, or performance optimization commission with VEYRO Web & Digital Studio.",
-            "url": "https://veyro.studio/contact",
-            "publisher": {
-              "@type": "Organization",
-              "name": studioConfig.brand.name,
-              "email": studioConfig.contact.email,
-              "url": "https://veyro.studio"
-            }
-          })
-        }}
-      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Navigation Breadcrumb */}

@@ -3,14 +3,20 @@ import { RoutePath } from '../types';
 import { Button } from '../components/Button';
 import { Shield, ArrowLeft, Lock, FileText, CheckCircle2 } from 'lucide-react';
 import { studioConfig } from '../config/studio';
+import { usePageSEO } from '../utils/seo';
 
 export interface PrivacyPageProps {
   onNavigate: (path: RoutePath) => void;
 }
 
 export const PrivacyPage: FC<PrivacyPageProps> = ({ onNavigate }) => {
+  usePageSEO({
+    title: 'Privacy Policy — VEYRO Web & Digital Studio',
+    description: 'Data governance and privacy notice for VEYRO Web & Digital Studio. Clear, transparent details on data collection and enquiry processing.',
+    path: '/privacy',
+  });
+
   useEffect(() => {
-    document.title = 'Privacy Policy — VEYRO Web & Digital Studio';
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 

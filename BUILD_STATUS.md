@@ -141,3 +141,31 @@ Completed: 2026-10-15
 - Copied the vector icon to `/public/favicon.svg` and updated `index.html` favicon linkage.
 - Updated Schema.org JSON-LD structured data in `src/pages/ArticleDetailPage.tsx` to reference the active logo vector.
 - Verified TypeScript compilation and production build (`tsc && vite build`) with zero errors.
+
+### 4. Technical SEO Audit & Repair (Audit Complete)
+- **Sitemap & URL Reconciliation**: Fixed two broken blog URLs in `/public/sitemap.xml` that did not match actual article slugs (`what-makes-a-website-convert-visitors-into-enquiries` and `web-design-vs-web-development-what-businesses-need`). Added slug aliasing in `src/data/articles.ts` to ensure 100% backward compatibility for legacy links.
+- **Indexation Directives & VEYRO Lab Privacy**: Added `usePageSEO` with `robots: 'noindex, nofollow'` to `src/pages/LabPage.tsx`, maintaining `/lab` disallow in `robots.txt` and complete exclusion from public navigation and sitemap.
+- **Dynamic & Static Metadata Unification**: Standardized `usePageSEO` across `ContactPage`, `PrivacyPage`, `TermsPage`, `ArticleDetailPage`, and `NotFoundView` (404 fallback).
+- **Initial HTML Hardening**: Updated `index.html` with canonical URL, correct `/og.svg` image link, Twitter card metadata, `robots: index, follow`, pre-rendered Schema.org `WebSite` & `ProfessionalService` structured data, and a crawlable `<noscript>` studio directory fallback.
+- **SPA Rewrite Fallback**: Created `/public/_redirects` for single-page application static hosting route resolution (`/* /index.html 200`).
+- **Configurable Canonical Domain**: Enhanced `src/config/studio.ts` and `src/utils/seo.ts` to support `VITE_REAL_DOMAIN` (and aliases `VITE_SITE_URL`, `VITE_CANONICAL_URL`), ensuring proper root canonical trailing slashes and safe preview fallbacks.
+- **Semantic HTML & Accessibility**: Replaced nested `<main>` landmark in `ArticleDetailPage` with semantic `<article>`, enhanced `:focus-visible` high-contrast outline styles, and enforced operating system `prefers-reduced-motion` overrides across animations and smooth scrolling.
+- **Core Web Vitals & Image Optimization**: Preserved the homepage hero visual exactly while adding explicit `width`, `height`, and `loading="eager"` across hero images to eliminate Cumulative Layout Shift (CLS).
+- **Portfolio Accuracy Verification**: Formally codified concept disclosures for ARCLINE STUDIO (fictional interior-design website concept), NOIRÉ (fictional fashion & lifestyle concept), and KAVO (self-initiated practice demo: Bean & Bite Coffee & Bakery) with slug aliasing in `getProjectBySlug`.
+
+### 5. Static Asset Pipeline & Cloudflare Workers Deployment Repair
+- **Root Cause Confirmed**: In the Vite build pipeline, files stored under `src/assets/images/` and `/BRAND/LOGO/` are not copied to `dist/` during `vite build` when referenced by raw absolute URL strings (`/src/assets/...`). While Vite's dev server intercepts `/src/...` requests locally, Cloudflare Workers serves only the contents of `dist/`. Missing assets triggered the SPA rewrite rule (`/* /index.html 200`), returning HTML with `Content-Type: text/html` to `<img>` tags and breaking all images on the live deployment.
+- **Asset Deployment Packaging**:
+  - Populated all 13 authentic project, editorial, and studio photography assets into `/public/images/`.
+  - For total backward compatibility with any cached browser requests, mirrored them to `/public/src/assets/images/`.
+  - Deployed the approved brand vector monogram to `/public/BRAND/LOGO/VEYRO-Icon-V.svg`, `/public/logo.svg`, and `/public/favicon.svg`.
+  - All assets are now automatically copied by Vite directly into `dist/images/`, `dist/src/assets/images/`, `dist/BRAND/LOGO/`, `dist/logo.svg`, and `dist/favicon.svg` on every build.
+- **Source Code Path Modernization**:
+  - `src/data/portfolio.ts`: Updated ARCLINE STUDIO, NOIRÉ, and KAVO cover and detail gallery paths to canonical `/images/...`.
+  - `src/data/articles.ts`: Updated all three launch articles to canonical `/images/...`.
+  - `src/pages/HomePage.tsx`: Updated homepage hero and OpenGraph image references to `/images/veyro_homepage_hero_1792116634810.jpg`.
+  - `src/pages/AboutPage.tsx`: Updated workspace visual to `/images/veyro_studio_about_1792116635606.jpg`.
+  - `src/pages/ProcessPage.tsx`: Updated craft visual to `/images/veyro_process_craft_1792116635793.jpg`.
+  - `src/pages/LabPage.tsx`: Updated interactive lab installation visual to `/images/veyro_lab_visual_1792116636014.jpg`.
+  - `src/components/Logo.tsx`: Updated logo component to standard `/logo.svg` with explicit width/height dimensions.
+- **Verification**: Verified production build (`tsc && vite build`) output structure and performed HTTP status checks (200 OK) across all 13 images and vector SVGs.

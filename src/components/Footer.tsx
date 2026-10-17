@@ -46,43 +46,40 @@ export const Footer: FC<FooterProps> = ({ onNavigate }) => {
             </div>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('/work')}
-                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left"
+                <a
+                  href="/work"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate('/work');
+                  }}
+                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left inline-block"
                 >
                   Work & Case Studies ↗
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('/services')}
-                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left"
+                <a
+                  href="/services"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate('/services');
+                  }}
+                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left inline-block"
                 >
                   Services ↗
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('/process')}
-                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left"
+                <a
+                  href="/process"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate('/process');
+                  }}
+                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left inline-block"
                 >
                   Process & Delivery ↗
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('/lab')}
-                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left flex items-center gap-2"
-                >
-                  <span>Veyro Lab</span>
-                  <span className="text-[9px] font-mono bg-[#C7FF3D]/10 text-[#C7FF3D] px-1.5 py-0.5 rounded-xs border border-[#C7FF3D]/20">
-                    Live Tools
-                  </span>
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -94,48 +91,63 @@ export const Footer: FC<FooterProps> = ({ onNavigate }) => {
             </div>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('/about')}
-                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left"
+                <a
+                  href="/about"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate('/about');
+                  }}
+                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left inline-block"
                 >
                   About the Studio ↗
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('/blog')}
-                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left"
+                <a
+                  href="/blog"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate('/blog');
+                  }}
+                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left inline-block"
                 >
                   Journal & Perspectives ↗
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('/contact')}
-                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left text-[#C7FF3D]"
+                <a
+                  href="/contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate('/contact');
+                  }}
+                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left text-[#C7FF3D] inline-block"
                 >
                   Start a Project (Commission) ↗
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('/privacy')}
-                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left text-zinc-500 text-xs"
+                <a
+                  href="/privacy"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate('/privacy');
+                  }}
+                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left text-zinc-500 text-xs inline-block"
                 >
                   Privacy Policy
-                </button>
+                </a>
                 <span className="mx-2 text-zinc-700">·</span>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('/terms')}
-                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left text-zinc-500 text-xs"
+                <a
+                  href="/terms"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate('/terms');
+                  }}
+                  className="hover:text-[#C7FF3D] transition-colors cursor-pointer text-left text-zinc-500 text-xs inline-block"
                 >
                   Terms of Service
-                </button>
+                </a>
               </li>
             </ul>
 

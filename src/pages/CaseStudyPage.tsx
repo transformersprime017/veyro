@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Button } from '../components/Button';
 import { getProjectBySlug } from '../data/portfolio';
+import { usePageSEO } from '../utils/seo';
 import { RoutePath } from '../types';
 import { 
   ArrowLeft, 
@@ -20,6 +21,32 @@ export interface CaseStudyPageProps {
 
 export const CaseStudyPage: FC<CaseStudyPageProps> = ({ slug, onNavigate }) => {
   const project = getProjectBySlug(slug);
+
+  usePageSEO({
+    title: project
+      ? `${project.title} — ${project.category} Case Study | VEYRO`
+      : 'Case Study Not Found — VEYRO Studio',
+    description: project
+      ? `${project.subtitle} High-performance web architecture engineered by VEYRO Web & Digital Studio.`
+      : 'The requested case study could not be found in our portfolio directory.',
+    path: `/work/${slug}`,
+    image: project?.coverImage || '/og.svg',
+    robots: project ? 'index, follow' : 'noindex, nofollow',
+    schema: project
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'CreativeWork',
+          name: project.title,
+          headline: `${project.title} — ${project.subtitle}`,
+          description: project.subtitle,
+          image: project.coverImage,
+          creator: {
+            '@type': 'Organization',
+            name: 'VEYRO Web & Digital Studio',
+          },
+        }
+      : null,
+  });
 
   // 1. Not Found Graceful Fallback
   if (!project) {
@@ -173,6 +200,8 @@ export const CaseStudyPage: FC<CaseStudyPageProps> = ({ slug, onNavigate }) => {
               <img
                 src={project.coverImage}
                 alt={`${project.title} Architectural Spatial Showcase`}
+                width={1920}
+                height={1080}
                 className="w-full h-full object-cover"
                 loading="eager"
                 referrerPolicy="no-referrer"

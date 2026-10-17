@@ -100,8 +100,17 @@ export const studioConfig: StudioConfig = {
     isWhatsappPlaceholder: !getEnv('VITE_WHATSAPP_NUMBER'),
   },
   deployment: {
-    domain: getEnv('VITE_REAL_DOMAIN', 'https://veyro.example') || 'https://veyro.example',
-    isProductionDomain: Boolean(getEnv('VITE_REAL_DOMAIN') && !getEnv('VITE_REAL_DOMAIN')?.includes('example')),
+    domain: (
+      getEnv('VITE_REAL_DOMAIN') || 
+      getEnv('VITE_SITE_URL') || 
+      getEnv('VITE_CANONICAL_URL') || 
+      getEnv('VITE_PRODUCTION_DOMAIN') || 
+      'https://veyro.example'
+    ).replace(/\/+$/, ''),
+    isProductionDomain: Boolean(
+      (getEnv('VITE_REAL_DOMAIN') || getEnv('VITE_SITE_URL') || getEnv('VITE_CANONICAL_URL') || getEnv('VITE_PRODUCTION_DOMAIN')) &&
+      !(getEnv('VITE_REAL_DOMAIN') || getEnv('VITE_SITE_URL') || getEnv('VITE_CANONICAL_URL') || getEnv('VITE_PRODUCTION_DOMAIN'))?.includes('example')
+    ),
   },
   social: {
     // All social links default to null until confirmed.
